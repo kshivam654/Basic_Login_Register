@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class Main2Activity extends AppCompatActivity {
 
     TextView back;
@@ -47,7 +49,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!password.getText().toString().equals(cpassword.getText().toString())){
-                    
+                    Snackbar.make(v,"Passwords need to be same...", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
