@@ -73,6 +73,9 @@ public class Main2Activity extends AppCompatActivity {
                 }
                 else
                     startRegis(email.getText().toString().trim(),password.getText().toString().trim());
+
+
+
             }
         });
     }
@@ -88,17 +91,17 @@ public class Main2Activity extends AppCompatActivity {
             return;
         }
 
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
 
                             String uid = "";
                             User user = new User();
                             user.setName(name.getText().toString());
-                            user.setEmail(email);
+                            user.setEmail(name.getText().toString());
                             user.setYear(year.getText().toString());
                             user.setBranch(branch.getText().toString());
                             user.setGroup(group.getText().toString());
@@ -107,7 +110,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             if(firebaseUser != null) uid = firebaseUser.getUid();
 
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                             Map<String, String> map = new HashMap<String, String>();
 
                             map.put("name", user.getName());
@@ -118,7 +121,9 @@ public class Main2Activity extends AppCompatActivity {
 
                             Log.e("if name is correct", user.getName());
 
-                            current_user_db.setValue(map);
+                            reference.setValue(map);
+
+                            Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
 
                             Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
                             startActivity(intent);
