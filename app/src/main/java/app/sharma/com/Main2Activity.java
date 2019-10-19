@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -64,18 +66,14 @@ public class Main2Activity extends AppCompatActivity {
                 if(!password.getText().toString().equals(cpassword.getText().toString())){
                     Snackbar.make(v,"Passwords need to be same...", Snackbar.LENGTH_LONG).show();
 
-                    startRegis(email,password);
-
                 }
+                else
+                    startRegis(email.getText().toString().trim(),password.getText().toString().trim());
             }
         });
     }
 
-    private void startRegis(EditText e, EditText p) {
-
-        String email, password;
-        email = e.getText().toString();
-        password = p.getText().toString();
+    private void startRegis(String email, String password) {
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
@@ -92,6 +90,7 @@ public class Main2Activity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+
 
                             Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
                             startActivity(intent);
