@@ -18,10 +18,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -73,7 +77,7 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-    private void startRegis(String email, String password) {
+    private void startRegis(final String email, String password) {
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
@@ -91,6 +95,30 @@ public class Main2Activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
 
+                            String uid = "";
+                            User user = new User();
+                            user.setName(name.getText().toString());
+                            user.setEmail(email);
+                            user.setYear(year.getText().toString());
+                            user.setBranch(branch.getText().toString());
+                            user.setGroup(group.getText().toString());
+
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                            if(firebaseUser != null) uid = firebaseUser.getUid();
+
+                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+                            Map<String, String> map = new HashMap<String, String>();
+
+                            map.put("name", user.getName());
+                            map.put("email", user.getEmail());
+                            map.put("year", user.getYear());
+                            map.put("branch", user.getBranch());
+                            map.put("group", user.getGroup());
+
+                            Log.e("if name is correct", user.getName());
+
+                            current_user_db.setValue(map);
 
                             Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
                             startActivity(intent);

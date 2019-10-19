@@ -2,7 +2,7 @@ package app.sharma.com;
 
 public class User {
 
-    String name, email, year, branch, group;
+    private String name, email, year, branch, group;
 
     public String getName() {
         return name;
