@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         join_us = findViewById(R.id.join_us);
         login = findViewById(R.id.login);
 
+        mAuth = FirebaseAuth.getInstance();
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent = new Intent(MainActivity.this, ScreenActivity.class);
