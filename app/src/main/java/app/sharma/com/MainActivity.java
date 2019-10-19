@@ -10,11 +10,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     Button join_us;
 
     TextView login;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         join_us = findViewById(R.id.join_us);
         login = findViewById(R.id.login);
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(MainActivity.this, ScreenActivity.class);
+            startActivity(intent);
+
+        }
+
         join_us.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
