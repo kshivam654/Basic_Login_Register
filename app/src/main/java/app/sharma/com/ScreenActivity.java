@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import app.sharma.com.Adapter.RequestAdapter;
 
@@ -77,6 +78,7 @@ public class ScreenActivity extends AppCompatActivity {
                     list.add(lp);
 
                 }
+                Collections.reverse(list);
                 adapter = new RequestAdapter(getApplicationContext(), list);
                 recyclerView.setAdapter(adapter);
 
