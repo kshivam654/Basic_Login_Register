@@ -35,7 +35,7 @@ public class RequestActivity extends AppCompatActivity {
         int month = datePicker.getMonth() + 1;
         int year = datePicker.getYear();
 
-        final Request from = new Request(day, month, year, 0);
+        final Request from = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
 
 
         DatePicker datePicker2 = (DatePicker) findViewById(R.id.datePicker2);
@@ -43,7 +43,7 @@ public class RequestActivity extends AppCompatActivity {
         month = datePicker2.getMonth() + 1;
         year = datePicker2.getYear();
 
-        final Request to = new Request(day, month, year, 0);
+        final Request to = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -53,25 +53,19 @@ public class RequestActivity extends AppCompatActivity {
                 String uid = mAuth.getCurrentUser().getUid();
                 String time = String.valueOf(System.currentTimeMillis());
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave").child(time).child("To");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave").child(time);
                 Map<String, String> map = new HashMap<String, String>();
 
-                map.put("Date", String.valueOf(to.getDate()));
-                map.put("Month", String.valueOf(to.getMonth()));
-                map.put("Year", String.valueOf(to.getYear()));
+                map.put("To_Date", String.valueOf(to.getDate()));
+                map.put("To_Month", String.valueOf(to.getMonth()));
+                map.put("To_Year", String.valueOf(to.getYear()));
+
+                map.put("From_Date", String.valueOf(from.getDate()));
+                map.put("From_Month", String.valueOf(from.getMonth()));
+                map.put("From_Year", String.valueOf(from.getYear()));
 
 
                 reference.setValue(map);
-
-                DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave").child(time).child("From");
-                Map<String, String> map2 = new HashMap<String, String>();
-
-                map2.put("Date", String.valueOf(from.getDate()));
-                map2.put("Month", String.valueOf(from.getMonth()));
-                map2.put("Year", String.valueOf(from.getYear()));
-
-
-                reference2.setValue(map2);
 
                 DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave").child(time).child("Request");
                 reference3.setValue("0");

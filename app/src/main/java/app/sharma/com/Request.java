@@ -1,47 +1,47 @@
 package app.sharma.com;
 
 public class Request {
-    private int date, month, year, requested;
+    private String date, month, year, requested;
 
-    public Request(int date, int month, int year, int requested) {
+    public Request() {
+    }
+
+    public Request(String date, String month, String year, String requested) {
         this.date = date;
         this.month = month;
         this.year = year;
         this.requested = requested;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public int getRequested() {
+    public String getRequested() {
         return requested;
     }
 
-    public void setRequested(int requested) {
+    public void setRequested(String requested) {
         this.requested = requested;
-    }
-
-    public Request() {
     }
 }

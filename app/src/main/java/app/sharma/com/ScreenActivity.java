@@ -33,8 +33,6 @@ public class ScreenActivity extends AppCompatActivity {
 
     RequestAdapter adapter = null;
 
-    private  ArrayList<ReadRequest> list;
-
     private FirebaseAuth mAuth;
 
     @Override
@@ -64,18 +62,18 @@ public class ScreenActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave");
 
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                list = new ArrayList<ReadRequest>();
+                final ArrayList<Leave> list = new ArrayList<Leave>();
 
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
 
-                    ReadRequest lp = dataSnapshot1.getValue(ReadRequest.class);
+                    Leave lp = dataSnapshot1.getValue(Leave.class);
                     list.add(lp);
 
                 }

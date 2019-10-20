@@ -1,12 +1,9 @@
 package app.sharma.com.Adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,16 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import app.sharma.com.Leave;
 import app.sharma.com.R;
-import app.sharma.com.ReadRequest;
-import app.sharma.com.Request;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder> {
 
     private Context context;
-    private ArrayList<ReadRequest> requestAdapters;
+    private ArrayList<Leave> requestAdapters;
 
-    public RequestAdapter(Context c, ArrayList<ReadRequest> l){
+    public RequestAdapter(Context c, ArrayList<Leave> l){
         context = c;
         requestAdapters = l;
     }
@@ -40,16 +36,16 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
 
 
-        myHolder.toDate.setText(requestAdapters.get(i).getLeave().getTo().getDate());
-        myHolder.toMonth.setText(requestAdapters.get(i).getLeave().getTo().getMonth());
-        myHolder.toYear.setText(requestAdapters.get(i).getLeave().getTo().getYear());
+        myHolder.toDate.setText(requestAdapters.get(i).getTo_Date());
+        myHolder.toMonth.setText(requestAdapters.get(i).getTo_Month());
+        myHolder.toYear.setText(requestAdapters.get(i).getTo_Year());
 
 
-        myHolder.fromDate.setText(requestAdapters.get(i).getLeave().getFrom().getDate());
-        myHolder.fromMonth.setText(requestAdapters.get(i).getLeave().getFrom().getMonth());
-        myHolder.fromYear.setText(requestAdapters.get(i).getLeave().getFrom().getYear());
+        myHolder.fromDate.setText(requestAdapters.get(i).getFrom_Date());
+        myHolder.fromMonth.setText(requestAdapters.get(i).getFrom_Month());
+        myHolder.fromYear.setText(requestAdapters.get(i).getFrom_Year());
 
-        myHolder.status.setText(requestAdapters.get(i).getLeave().getRequest());
+        myHolder.status.setText(requestAdapters.get(i).getRequested());
 
 
 //        myHolder.toMonth.setText(requestAdapters.get(i).getMonth());
