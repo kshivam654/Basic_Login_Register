@@ -1,12 +1,13 @@
 package app.sharma.com;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,29 +23,43 @@ public class RequestActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
+    Request to, from;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
 
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.submit);
+        floatingActionButton = findViewById(R.id.submit);
 
         mAuth = FirebaseAuth.getInstance();
 
-        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker1);
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth() + 1;
-        int year = datePicker.getYear();
+        final DatePicker datePicker = findViewById(R.id.datePicker1);
 
-        final Request from = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
+        datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                int day = datePicker.getDayOfMonth();
+                int month = datePicker.getMonth() + 1;
+                int yearr = datePicker.getYear();
+
+                from = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
+            }
+        });
 
 
-        DatePicker datePicker2 = (DatePicker) findViewById(R.id.datePicker2);
-        day = datePicker2.getDayOfMonth();
-        month = datePicker2.getMonth() + 1;
-        year = datePicker2.getYear();
+        final DatePicker datePicker2 = findViewById(R.id.datePicker2);
+        datePicker2.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                int day = datePicker2.getDayOfMonth();
+                int month = datePicker2.getMonth() + 1;
+                int yearr = datePicker2.getYear();
 
-        final Request to = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
+                to = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
+            }
+        });
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
