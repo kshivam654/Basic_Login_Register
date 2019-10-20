@@ -15,14 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import app.sharma.com.R;
+import app.sharma.com.ReadRequest;
 import app.sharma.com.Request;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder> {
 
     private Context context;
-    private ArrayList<Request> requestAdapters;
+    private ArrayList<ReadRequest> requestAdapters;
 
-    public RequestAdapter(Context c, ArrayList<Request> l){
+    public RequestAdapter(Context c, ArrayList<ReadRequest> l){
         context = c;
         requestAdapters = l;
     }
@@ -39,13 +40,24 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
 
 
-        myHolder.toDate.setText(requestAdapters.get(i).getDate());
-        myHolder.toMonth.setText(requestAdapters.get(i).getMonth());
-        myHolder.toYear.setText(requestAdapters.get(i).getYear());
+        myHolder.toDate.setText(requestAdapters.get(i).getLeave().getTo().getDate());
+        myHolder.toMonth.setText(requestAdapters.get(i).getLeave().getTo().getMonth());
+        myHolder.toYear.setText(requestAdapters.get(i).getLeave().getTo().getYear());
 
-        myHolder.fromDate.setText(requestAdapters.get(i).getDate());
-        myHolder.fromMonth.setText(requestAdapters.get(i).getMonth());
-        myHolder.fromYear.setText(requestAdapters.get(i).getYear());
+
+        myHolder.fromDate.setText(requestAdapters.get(i).getLeave().getFrom().getDate());
+        myHolder.fromMonth.setText(requestAdapters.get(i).getLeave().getFrom().getMonth());
+        myHolder.fromYear.setText(requestAdapters.get(i).getLeave().getFrom().getYear());
+
+        myHolder.status.setText(requestAdapters.get(i).getLeave().getRequest());
+
+
+//        myHolder.toMonth.setText(requestAdapters.get(i).getMonth());
+//        myHolder.toYear.setText(requestAdapters.get(i).getYear());
+
+//        myHolder.fromDate.setText(requestAdapters.get(i).getDate());
+//        myHolder.fromMonth.setText(requestAdapters.get(i).getMonth());
+//        myHolder.fromYear.setText(requestAdapters.get(i).getYear());
 
         //myHolder.status.setText(requestAdapters.get(i).);
     }
@@ -73,9 +85,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
             toDate= (TextView) itemView.findViewById(R.id.tdate);
             toMonth= (TextView) itemView.findViewById(R.id.tmonth);
             toYear= (TextView) itemView.findViewById(R.id.tyear);
+
             fromDate= (TextView) itemView.findViewById(R.id.fdate);
             fromMonth= (TextView) itemView.findViewById(R.id.fmonth);
             fromYear= (TextView) itemView.findViewById(R.id.fyear);
+
             status= (TextView) itemView.findViewById(R.id.status);
         }
 

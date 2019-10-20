@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +33,19 @@ public class ScreenActivity extends AppCompatActivity {
 
     RequestAdapter adapter = null;
 
-    private  ArrayList<Request> list;
+    private  ArrayList<ReadRequest> list;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        String uid = firebaseUser.getUid();
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingactionbutton);
 
@@ -55,18 +64,18 @@ public class ScreenActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("LightProducts");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                list = new ArrayList<Request>();
+                list = new ArrayList<ReadRequest>();
 
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
 
-                    Request lp = dataSnapshot1.getValue(Request.class);
+                    ReadRequest lp = dataSnapshot1.getValue(ReadRequest.class);
                     list.add(lp);
 
                 }
