@@ -1,16 +1,37 @@
 package app.sharma.com;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import app.sharma.com.Adapter.RequestAdapter;
 
 public class ScreenActivity extends AppCompatActivity {
 
     FloatingActionButton floatingActionButton;
+
+    RecyclerView recyclerView;
+
+    LinearLayoutManager linearLayoutManager;
+
+    RequestAdapter adapter = null;
+
+    private  ArrayList<Request> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +45,41 @@ public class ScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ScreenActivity.this, RequestActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("LightProducts");
+
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                list = new ArrayList<Request>();
+
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+
+                    Request lp = dataSnapshot1.getValue(Request.class);
+                    list.add(lp);
+
+                }
+                adapter = new RequestAdapter(getApplicationContext(), list);
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getApplicationContext(), "Error occurred while loading values", Toast.LENGTH_SHORT).show();
+
             }
         });
 
