@@ -1,9 +1,11 @@
 package app.sharma.com.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
     private Context context;
     private ArrayList<Leave> requestAdapters;
 
-    public RequestAdapter(Context c, ArrayList<Leave> l){
+    public RequestAdapter(Context c, ArrayList<Leave> l) {
         context = c;
         requestAdapters = l;
     }
@@ -27,7 +29,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.leave_layout,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.leave_layout, viewGroup, false);
 
         return new MyHolder(v);
     }
@@ -45,17 +47,27 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
         myHolder.fromMonth.setText(requestAdapters.get(i).getFrom_Month());
         myHolder.fromYear.setText(requestAdapters.get(i).getFrom_Year());
 
-        myHolder.status.setText(requestAdapters.get(i).getRequested());
 
+        switch (requestAdapters.get(i).getRequested()) {
+            case "0":
+                myHolder.status.setText("Reqest Pending");
+                myHolder.ll.setBackgroundColor(Color.parseColor("#FFC107"));
+                break;
+            case "1":
+                myHolder.status.setText("Reqest Visited");
+                myHolder.ll.setBackgroundColor(Color.parseColor("#929290"));
+                break;
+            case "2":
+                myHolder.status.setText("Reqest Accepted");
+                myHolder.ll.setBackgroundColor(Color.parseColor("#0FEB18"));
+                break;
+            case "3":
+                myHolder.status.setText("Reqest Denied");
+                myHolder.ll.setBackgroundColor(Color.parseColor("#EC1010"));
+                break;
 
-//        myHolder.toMonth.setText(requestAdapters.get(i).getMonth());
-//        myHolder.toYear.setText(requestAdapters.get(i).getYear());
+        }
 
-//        myHolder.fromDate.setText(requestAdapters.get(i).getDate());
-//        myHolder.fromMonth.setText(requestAdapters.get(i).getMonth());
-//        myHolder.fromYear.setText(requestAdapters.get(i).getYear());
-
-        //myHolder.status.setText(requestAdapters.get(i).);
     }
 
     @Override
@@ -75,18 +87,22 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
 
         TextView status;
 
+        LinearLayout ll;
+
         public MyHolder(View itemView) {
             super(itemView);
 
-            toDate= (TextView) itemView.findViewById(R.id.tdate);
-            toMonth= (TextView) itemView.findViewById(R.id.tmonth);
-            toYear= (TextView) itemView.findViewById(R.id.tyear);
+            toDate = itemView.findViewById(R.id.tdate);
+            toMonth = itemView.findViewById(R.id.tmonth);
+            toYear = itemView.findViewById(R.id.tyear);
 
-            fromDate= (TextView) itemView.findViewById(R.id.fdate);
-            fromMonth= (TextView) itemView.findViewById(R.id.fmonth);
-            fromYear= (TextView) itemView.findViewById(R.id.fyear);
+            fromDate = itemView.findViewById(R.id.fdate);
+            fromMonth = itemView.findViewById(R.id.fmonth);
+            fromYear = itemView.findViewById(R.id.fyear);
 
-            status= (TextView) itemView.findViewById(R.id.status);
+            status = itemView.findViewById(R.id.status);
+
+            ll = itemView.findViewById(R.id.ll);
         }
 
         public void onClick(final int position) {
@@ -95,7 +111,6 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyHolder
         }
 
     }
-
 
 
 }

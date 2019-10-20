@@ -1,7 +1,5 @@
 package app.sharma.com;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(MainActivity.this, ScreenActivity.class);
             startActivity(intent);
 
@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
         join_us.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
+                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
                 startActivity(intent);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Main3Activity.class);
+                Intent intent = new Intent(getApplicationContext(), Main3Activity.class);
                 startActivity(intent);
             }
         });

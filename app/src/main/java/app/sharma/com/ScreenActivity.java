@@ -1,14 +1,14 @@
 package app.sharma.com;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +45,7 @@ public class ScreenActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         String uid = firebaseUser.getUid();
 
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingactionbutton);
+        floatingActionButton = findViewById(R.id.floatingactionbutton);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class ScreenActivity extends AppCompatActivity {
         });
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
 
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -71,7 +71,7 @@ public class ScreenActivity extends AppCompatActivity {
 
                 final ArrayList<Leave> list = new ArrayList<Leave>();
 
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
                     Leave lp = dataSnapshot1.getValue(Leave.class);
                     list.add(lp);

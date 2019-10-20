@@ -1,8 +1,5 @@
 package app.sharma.com;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,16 +46,16 @@ public class Main2Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        back = (TextView) findViewById(R.id.back);
-        name = (EditText) findViewById(R.id.name);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        cpassword = (EditText) findViewById(R.id.confirmpassword);
-        year = (EditText) findViewById(R.id.year);
-        branch = (EditText) findViewById(R.id.branch);
-        group = (EditText) findViewById(R.id.group);
+        back = findViewById(R.id.back);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        cpassword = findViewById(R.id.confirmpassword);
+        year = findViewById(R.id.year);
+        branch = findViewById(R.id.branch);
+        group = findViewById(R.id.group);
 
-        signup = (Button) findViewById(R.id.signup);
+        signup = findViewById(R.id.signup);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +67,11 @@ public class Main2Activity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!password.getText().toString().equals(cpassword.getText().toString())){
-                    Snackbar.make(v,"Passwords need to be same...", Snackbar.LENGTH_LONG).show();
+                if (!password.getText().toString().equals(cpassword.getText().toString())) {
+                    Snackbar.make(v, "Passwords need to be same...", Snackbar.LENGTH_LONG).show();
 
-                }
-                else
-                    startRegis(email.getText().toString().trim(),password.getText().toString().trim());
-
+                } else
+                    startRegis(email.getText().toString().trim(), password.getText().toString().trim());
 
 
             }
@@ -108,7 +106,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                            if(firebaseUser != null) uid = firebaseUser.getUid();
+                            if (firebaseUser != null) uid = firebaseUser.getUid();
 
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                             Map<String, String> map = new HashMap<String, String>();
@@ -127,8 +125,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
                         }
                     }

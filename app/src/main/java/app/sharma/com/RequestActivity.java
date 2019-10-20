@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,8 +68,11 @@ public class RequestActivity extends AppCompatActivity {
 
                 reference.setValue(map);
 
-                DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave").child(time).child("Request");
+                DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Leave").child(time).child("requested");
                 reference3.setValue("0");
+
+                finish();
+                Toast.makeText(RequestActivity.this, "Your Request has been submitted", Toast.LENGTH_SHORT).show();
 
             }
         });

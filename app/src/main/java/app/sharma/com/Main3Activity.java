@@ -1,11 +1,7 @@
 package app.sharma.com;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,9 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,10 +39,10 @@ public class Main3Activity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        name = (EditText) findViewById(R.id.lname);
-        password = (EditText) findViewById(R.id.lpassword);
+        name = findViewById(R.id.lname);
+        password = findViewById(R.id.lpassword);
 
-        login = (Button) findViewById(R.id.login);
+        login = findViewById(R.id.login);
 
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +56,7 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    startLogin(name.getText().toString().trim(),password.getText().toString().trim());
+                startLogin(name.getText().toString().trim(), password.getText().toString().trim());
 
             }
         });
