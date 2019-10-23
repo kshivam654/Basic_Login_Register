@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:hint="date "
+                android:hint="month "
                 android:textSize="25dp" />
 
             <TextView
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:hint="date "
+                android:hint="year "
                 android:textSize="25dp" />
 
         </LinearLayout>

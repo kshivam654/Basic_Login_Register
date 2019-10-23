@@ -23,7 +23,7 @@ public class RequestActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
-    Request to, from;
+    Request to, from = new Request();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,7 +44,7 @@ public class RequestActivity extends AppCompatActivity {
                 int month = datePicker.getMonth() + 1;
                 int yearr = datePicker.getYear();
 
-                from = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(year), "0");
+                from = new Request(String.valueOf(day), String.valueOf(month), String.valueOf(yearr), "0");
             }
         });
 

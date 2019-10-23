@@ -68,7 +68,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!password.getText().toString().equals(cpassword.getText().toString())) {
-                    Snackbar.make(v, "Passwords need to be same...", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, "Passwords need to be same...", Snackbar.LENGTH_SHORT).show();
 
                 } else
                     startRegis(email.getText().toString().trim(), password.getText().toString().trim());
@@ -99,7 +99,7 @@ public class Main2Activity extends AppCompatActivity {
                             String uid = "";
                             User user = new User();
                             user.setName(name.getText().toString());
-                            user.setEmail(name.getText().toString());
+                            user.setEmail(email);
                             user.setYear(year.getText().toString());
                             user.setBranch(branch.getText().toString());
                             user.setGroup(group.getText().toString());
